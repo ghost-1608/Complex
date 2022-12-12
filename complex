@@ -12,6 +12,7 @@ namespace std
   	bool sign;
   
   	void rlEngine(const char[], size_t, size_t, int);
+    
   public:
   	Complex ();
   
@@ -86,146 +87,146 @@ void std::Complex::rlEngine(const char buff[], size_t i=0, size_t len=256, int q
 	
 	switch (q)
 	{
-		case 1:
-			if (buff[i] == '.')
-				rlEngine(buff, i + 1, len, q=2);
-			if (buff[i] >= 48 && buff[i] <= 57)
-			{
-				whole = buff[i] - 48;
-				a = whole;
-				rlEngine(buff, i + 1, len, q=3);
-			}
-			if (buff[i] == '+' || buff[i] == '-')
-			{
-				sign = false;
-				if (buff[i] == '-')
-					sign = true;
-				rlEngine(buff, i + 1, len, q=4);
-			}
-			if (buff[i] == 'j')
-			{
-				whole = 1; fractional = 0;
-				rlEngine(buff, i + 1, len, q=7);
-			}
-			return;
-		case 2:
-			if (buff[i] >= 48 && buff[i] <= 57)
-			{
-				fractional = fractional * 10 + buff[i] - 48;
-				long double temp = fractional;
-				while (static_cast<unsigned long long>(temp))
-					temp /= 10;
-				a = (sign ? -1 : 1) * (whole + temp);
-		 		rlEngine(buff, i + 1, len, q=2);
-			}
-			if (buff[i] == '+' || buff[i] == '-')
-			{
-				whole = 0; fractional = 0;
-				sign = false;
-				if (buff[i] == '-')
-					sign = true;
-				rlEngine(buff, i + 1, len, q=5);
-			}
-			if (buff[i] == 'j')
-			{
-				b = a; a = 0;
-				rlEngine(buff, i + 1, len, q=7);
-			}
-			return;
-		case 3:
-		 	if (buff[i] == '.')
-				rlEngine(buff, i + 1, len, q=2);
-			if (buff[i] == '+' || buff[i] == '-')
-			{
-				whole = 0;
-				sign = false;
-				if (buff[i] == '-')
-					sign = true;
-				rlEngine(buff, i + 1, len, q=5);
-			}
-			if (buff[i] >= 48 && buff[i] <= 57)
-			{
-				whole = whole * 10 + (sign ? -1 : 1) * (buff[i] - 48);
-				a = whole;
-				rlEngine(buff, i + 1, len, q=3);
-			}
-			if (buff[i] == 'j')
-			{
-				b = a; a = 0;
-				rlEngine(buff, i + 1, len, q=7);	
-			}
-			return;
-		case 4:
-			if (buff[i] == '+' || buff[i] == '-')
-			{
-				whole = 0;
-				sign = false;
-				if (buff[i] == '-')
-				sign = true;
-			rlEngine(buff, i + 1, len, q=5);
-			}
-			if (buff[i] == '.')
-				rlEngine(buff, i + 1, len, q=6);
-			if (buff[i] == 'j')
-			{
-				b = a; a = 0;
-				rlEngine(buff, i + 1, len, q=7);
-			}
-			if (buff[i] >= 48 && buff[i] <= 57)
-			{
-				whole = whole * 10 + (sign ? -1 : 1) * (buff[i] - 48);
-				a = whole;
-				rlEngine(buff, i + 1, len, q=4);
-			}
-			return;
-		case 5:
-			if (buff[i] == 'j')
-				rlEngine(buff, i + 1, len, q=7);
-			if (buff[i] == '.')
-			{
-				fractional = 0;
-				rlEngine(buff, i + 1, len, q=8);
-			}
-			if (buff[i] >= 48 && buff[i] <= 57)
-			{
-				whole = whole * 10 + (sign ? -1 : 1) * (buff[i] - 48);
-				rlEngine(buff, i + 1, len, q=5);
-			}
-			return;
-		case 6:
-			if (buff[i] == '+' || buff[i] == '-')
-				rlEngine(buff, i + 1, len, q=5);
-			if (buff[i] == 'j')
-			{
-				b = a;
-				a = 0;
-				whole = 0; fractional = 0;
-				rlEngine(buff, i + 1, len, q=7);
-			}
-			if (buff[i] >= 48 && buff[i] <= 57)
-			{
-				fractional = fractional * 10 + buff[i] - 48;
-				long double temp = fractional;
-				while (static_cast<unsigned long long>(temp))
-					temp /= 10;
-				a = (sign ? -1 : 1) * (whole + temp);
-				rlEngine(buff, i + 1, len, q=6);
-			}
-			return;
-		case 7:
-			while (static_cast<unsigned long long>(fractional))
-				fractional /= 10;
-			b = whole + (sign ? -1 : 1) * fractional;
-			return;
-		case 8:
-			if (buff[i] == 'j')
-				rlEngine(buff, i + 1, len, q=7);
-			if (buff[i] >= 48 && buff[i] <= 57)
-			{
-				fractional = fractional * 10 + buff[i] - 48;
-				rlEngine(buff, i + 1, len, q=8);
-			}
-			return;
+    case 1:
+      if (buff[i] == '.')
+        rlEngine(buff, i + 1, len, q=2);
+      if (buff[i] >= 48 && buff[i] <= 57)
+      {
+        whole = buff[i] - 48;
+        a = whole;
+        rlEngine(buff, i + 1, len, q=3);
+      }
+      if (buff[i] == '+' || buff[i] == '-')
+      {
+        sign = false;
+        if (buff[i] == '-')
+          sign = true;
+        rlEngine(buff, i + 1, len, q=4);
+      }
+      if (buff[i] == 'j')
+      {
+        whole = 1; fractional = 0;
+        rlEngine(buff, i + 1, len, q=7);
+      }
+      return;
+    case 2:
+      if (buff[i] >= 48 && buff[i] <= 57)
+      {
+        fractional = fractional * 10 + buff[i] - 48;
+        long double temp = fractional;
+        while (static_cast<unsigned long long>(temp))
+          temp /= 10;
+        a = (sign ? -1 : 1) * (whole + temp);
+        rlEngine(buff, i + 1, len, q=2);
+      }
+      if (buff[i] == '+' || buff[i] == '-')
+      {
+        whole = 0; fractional = 0;
+        sign = false;
+        if (buff[i] == '-')
+          sign = true;
+        rlEngine(buff, i + 1, len, q=5);
+      }
+      if (buff[i] == 'j')
+      {
+        b = a; a = 0;
+        rlEngine(buff, i + 1, len, q=7);
+      }
+      return;
+    case 3:
+      if (buff[i] == '.')
+        rlEngine(buff, i + 1, len, q=2);
+      if (buff[i] == '+' || buff[i] == '-')
+      {
+        whole = 0;
+        sign = false;
+        if (buff[i] == '-')
+          sign = true;
+        rlEngine(buff, i + 1, len, q=5);
+      }
+      if (buff[i] >= 48 && buff[i] <= 57)
+      {
+        whole = whole * 10 + (sign ? -1 : 1) * (buff[i] - 48);
+        a = whole;
+        rlEngine(buff, i + 1, len, q=3);
+      }
+      if (buff[i] == 'j')
+      {
+        b = a; a = 0;
+        rlEngine(buff, i + 1, len, q=7);	
+      }
+      return;
+    case 4:
+      if (buff[i] == '+' || buff[i] == '-')
+      {
+        whole = 0;
+        sign = false;
+        if (buff[i] == '-')
+        sign = true;
+        rlEngine(buff, i + 1, len, q=5);
+      }
+      if (buff[i] == '.')
+        rlEngine(buff, i + 1, len, q=6);
+      if (buff[i] == 'j')
+      {
+        b = a; a = 0;
+        rlEngine(buff, i + 1, len, q=7);
+      }
+      if (buff[i] >= 48 && buff[i] <= 57)
+      {
+        whole = whole * 10 + (sign ? -1 : 1) * (buff[i] - 48);
+        a = whole;
+        rlEngine(buff, i + 1, len, q=4);
+      }
+      return;
+    case 5:
+      if (buff[i] == 'j')
+        rlEngine(buff, i + 1, len, q=7);
+      if (buff[i] == '.')
+      {
+        fractional = 0;
+        rlEngine(buff, i + 1, len, q=8);
+      }
+      if (buff[i] >= 48 && buff[i] <= 57)
+      {
+        whole = whole * 10 + (sign ? -1 : 1) * (buff[i] - 48);
+        rlEngine(buff, i + 1, len, q=5);
+      }
+      return;
+    case 6:
+      if (buff[i] == '+' || buff[i] == '-')
+        rlEngine(buff, i + 1, len, q=5);
+      if (buff[i] == 'j')
+      {
+        b = a;
+        a = 0;
+        whole = 0; fractional = 0;
+        rlEngine(buff, i + 1, len, q=7);
+      }
+      if (buff[i] >= 48 && buff[i] <= 57)
+      {
+        fractional = fractional * 10 + buff[i] - 48;
+        long double temp = fractional;
+        while (static_cast<unsigned long long>(temp))
+          temp /= 10;
+        a = (sign ? -1 : 1) * (whole + temp);
+        rlEngine(buff, i + 1, len, q=6);
+      }
+      return;
+    case 7:
+      while (static_cast<unsigned long long>(fractional))
+        fractional /= 10;
+      b = whole + (sign ? -1 : 1) * fractional;
+      return;
+    case 8:
+      if (buff[i] == 'j')
+        rlEngine(buff, i + 1, len, q=7);
+      if (buff[i] >= 48 && buff[i] <= 57)
+      {
+        fractional = fractional * 10 + buff[i] - 48;
+        rlEngine(buff, i + 1, len, q=8);
+      }
+      return;
 	}
 }
 
@@ -270,7 +271,7 @@ std::Complex std::Complex::operator+ (T r)
 }
 
 template <class T>
-friend std::Complex operator+ (T l, Complex r)
+std::Complex operator+ (T l, Complex r)
 {
 	return {l + r.a, r.b};
 }
@@ -287,7 +288,7 @@ std::Complex std::Complex::operator- (T r)
 }
 
 template <class T>
-friend std::Complex operator- (T l, Complex c)
+std::Complex operator- (T l, Complex c)
 {
 	return {l - c.a, c.b};
 }
@@ -304,7 +305,7 @@ std::Complex std::Complex::operator* (T r)
 }
 
 template <class T>
-friend std::Complex operator* (T l, Complex r)
+std::Complex operator* (T l, Complex r)
 {
 	return {l * r.a, l * r.b};
 }
@@ -321,7 +322,7 @@ std::Complex std::Complex::operator/ (T r)
 }
 
 template <class T>
-friend std::Complex operator/ (T l, Complex r)
+std::Complex operator/ (T l, Complex r)
 {
 	return {l * r.a / (r.a * r.a + r.b * r.b), l * r.b / (r.a * r.a + r.b * r.b)};
 }
@@ -353,7 +354,7 @@ std::Complex::operator T ()
 	return T(a);
 }
 
-friend std::ostream& operator<< (std::ostream& obuff, Complex c)
+std::ostream& operator<< (std::ostream& obuff, Complex c)
 {
 	if (!c.a && !c.b)
 	{
@@ -397,7 +398,7 @@ friend std::ostream& operator<< (std::ostream& obuff, Complex c)
 	{
 		if (c.b > 0 && c.a)
 			obuff << '+';
-			obuff << c.b << 'j';
+		obuff << c.b << 'j';
 	}
 
 	if (flag)
@@ -406,7 +407,7 @@ friend std::ostream& operator<< (std::ostream& obuff, Complex c)
 	return obuff;
 }
 
-friend std::istream& operator>> (std::istream& ibuff, Complex& c)
+std::istream& operator>> (std::istream& ibuff, Complex& c)
 {
 	char buff[256];
 	
