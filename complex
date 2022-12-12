@@ -4,74 +4,74 @@
 
 namespace std
 {
-    class Complex
-    {
-    	long double a, b;
-    
-    	long double whole, fractional;
-    	bool sign;
-    
-    	void rlEngine(const char[], size_t, size_t, int);
-    public:
-    	Complex ();
-    
-    	Complex (long double, long double);
-    
-    	void operator++ ();
-    
-    	void operator++ (int);
-    
-    	void operator-- ();
-    
-    	void operator-- (int);
-    
-    	Complex operator- ();
-    
-    	Complex operator+ (Complex) const;
-    
-    	template <class T>
-    	Complex operator+ (T) const;
-    
-    	template <class T>
-    	friend Complex operator+ (T, Complex);
-    
-    	Complex operator- (Complex) const;
-    
-    	template <class T>
-    	Complex operator- (T) const;
-    
-    	template <class T>
-    	friend Complex operator- (T, Complex);
-    
-    	Complex operator* (Complex) const;
-    
-    	template <class T>
-    	Complex operator* (T) const;
-    
-    	template <class T>
-    	friend Complex operator* (T, Complex);
-    
-    	Complex operator/ (Complex) const;
-    
-    	template <class T>
-    	Complex operator/ (T) const;
-    
-    	template <class T>
-    	friend Complex operator/ (T, Complex);
-    
-    	bool operator== (Complex) const;
-    
-    	bool operator!= (Complex) const;
-    
-    	operator bool () const;
-    
-    	template <class T>
-    	operator T () const;
-    
-    	friend std::ostream& operator<< (std::ostream&, Complex);
-    
-    	friend std::istream& operator>> (std::istream&, Complex&);
-    };
+  class Complex
+  {
+  	long double a, b;
+  
+  	long double whole, fractional;
+  	bool sign;
+  
+  	void rlEngine(const char[], size_t, size_t, int);
+  public:
+  	Complex ();
+  
+  	Complex (long double, long double);
+  
+  	void operator++ ();
+  
+  	void operator++ (int);
+  
+  	void operator-- ();
+  
+  	void operator-- (int);
+  
+  	Complex operator- ();
+  
+  	Complex operator+ (Complex) const;
+  
+  	template <class T>
+  	Complex operator+ (T) const;
+  
+  	template <class T>
+  	friend Complex operator+ (T, Complex);
+  
+  	Complex operator- (Complex) const;
+  
+  	template <class T>
+  	Complex operator- (T) const;
+  
+  	template <class T>
+  	friend Complex operator- (T, Complex);
+  
+  	Complex operator* (Complex) const;
+  
+  	template <class T>
+  	Complex operator* (T) const;
+  
+  	template <class T>
+  	friend Complex operator* (T, Complex);
+  
+  	Complex operator/ (Complex) const;
+  
+  	template <class T>
+  	Complex operator/ (T) const;
+  
+  	template <class T>
+  	friend Complex operator/ (T, Complex);
+  
+  	bool operator== (Complex) const;
+  
+  	bool operator!= (Complex) const;
+  
+  	operator bool () const;
+  
+  	template <class T>
+  	operator T () const;
+  
+  	friend std::ostream& operator<< (std::ostream&, Complex);
+  
+  	friend std::istream& operator>> (std::istream&, Complex&);
+  };
 }
 
 void std::Complex::rlEngine(const char buff[], size_t i=0, size_t len=256, int q=1)
